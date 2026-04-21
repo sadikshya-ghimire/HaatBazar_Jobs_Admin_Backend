@@ -9,6 +9,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
+const issueRoutes = require('./routes/issueRoutes');
 
 // Connect to MongoDB
 connectDB();
@@ -40,6 +41,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/issues', issueRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
