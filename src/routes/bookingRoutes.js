@@ -7,8 +7,9 @@ const { protect, admin } = require('../middleware/auth');
 router.get('/', protect, admin, async (req, res) => {
   try {
     console.log('Fetching all bookings...');
-    const bookings = await Booking.find().sort({ createdAt: -1 });
-    console.log(`Found ${bookings.length} bookings`);
+    // Only fetch bookings where paymentCompleted is true
+    const bookings = await Booking.find({ paymentCompleted: true }).sort({ createdAt: -1 });
+    console.log(`Found ${bookings.length} bookings with completed payment`);
     if (bookings.length > 0) {
       console.log('Sample booking:', JSON.stringify(bookings[0], null, 2));
     }
@@ -23,6 +24,7 @@ router.get('/', protect, admin, async (req, res) => {
 router.get('/pending', protect, admin, async (req, res) => {
   try {
     const bookings = await Booking.find({ 
+      paymentCompleted: true, // Only show bookings with completed payment
       $or: [
         { bookingStatus: 'pending' },
         { status: 'pending' },

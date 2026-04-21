@@ -46,7 +46,8 @@ const bookingSchema = new mongoose.Schema({
     enum: ['pending', 'paid', 'failed', 'pnding'],
     default: 'pending'
   },
-  paymentMethod: String,
+  paymentCompleted: Boolean, // true if payment is completed
+  paymentMethod: String, // Payment method chosen by payer (e.g., 'Cash', 'eSewa', 'Khalti', etc.)
   paymentAmount: Number,
   
   // Booking status
